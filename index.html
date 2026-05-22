@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <title>3D Solar System Educational Viewer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- นำเข้าไลบรารีหลักผ่าน CDN -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+                "@tweenjs/tween.js": "https://unpkg.com/@tweenjs/tween.js@23.1.1/dist/tween.esm.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- แจ้งเตือนให้หมุนจอ (กรณีเปิดแนวตั้ง) -->
+    <div id="orientation-warning">
+        <p>โปรดหมุนอุปกรณ์ของคุณเป็น "แนวนอน" เพื่อประสบการณ์ที่ดีที่สุด 🔄</p>
+    </div>
+
+    <!-- หน้าแรก: เลือกเข้าระบบ -->
+    <div id="menu-screen" class="ui-layer">
+        <div class="menu-content">
+            <h1>SOLAR SYSTEM SIMULATOR</h1>
+            <p>ระบบเรียนรู้ดวงดาวจำลองในรูปแบบมิติสมจริง</p>
+            <div class="system-grid">
+                <button class="btn-system" data-system="solar">ระบบสุริยะหลัก (Solar System)</button>
+                <button class="btn-system" data-system="inner" disabled>ดาวเคราะห์วงใน (เร็วๆ นี้)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าหลัก: 3D Viewer -->
+    <div id="viewer-screen" class="ui-layer hidden">
+        <canvas id="webgl-canvas"></canvas>
+
+        <!-- UI ควบคุมหลัก -->
+        <div class="hud-top-left">
+            <button id="btn-back" class="btn-hud">⬅️ ออกจากระบบ</button>
+            <button id="btn-reset-cam" class="btn-hud">🔄 รีเซ็ตมุมกล้อง</button>
+        </div>
+
+        <!-- แผงข้อมูลดาวเคราะห์ (เปิดจากด้านข้างขวา ไม่บังศูนย์กลางจอ) -->
+        <div id="info-panel" class="info-panel hidden">
+            <button id="btn-close-panel" class="btn-close">✖</button>
+            <div class="panel-body">
+                <h2 id="planet-name">ชื่อดาวเคราะห์</h2>
+                <hr>
+                <p id="planet-desc">คำอธิบายรายละเอียดดาวเคราะห์...</p>
+                <div class="planet-stats">
+                    <p><strong>ระยะห่างจากดวงอาทิตย์:</strong> <span id="stat-distance">-</span></p>
+                    <p><strong>คาบการโคจร:</strong> <span id="stat-orbit">-</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
